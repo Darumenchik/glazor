@@ -1,0 +1,287 @@
+:root {
+    --bg-dark: #0f0c29;
+    --bg-card: rgba(20, 20, 40, 0.7);
+    --primary: #8a2be2; /* Фиолетовый */
+    --accent: #00ffff;  /* Циан */
+    --text: #e0e0ff;
+    --gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+
+body {
+    background: var(--gradient);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- АНИМАЦИИ --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Применяем анимацию ко всем новым постам */
+.post {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* --- АВТОРИЗАЦИЯ --- */
+#auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-card {
+    background: rgba(20, 20, 40, 0.85);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(138, 43, 226, 0.4);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(138, 43, 226, 0.5);
+}
+
+h1 {
+    font-size: 3rem;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+    margin-bottom: 30px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--primary);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    background: linear-gradient(45deg, var(--primary), #4b0082);
+    border: none;
+    color: #fff;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:active { transform: scale(0.98); }
+button:hover { box-shadow: 0 0 25px var(--primary); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.switch-text { margin-top: 20px; font-size: 14px; color: #aaa; }
+.neon-link { color: var(--accent); cursor: pointer; text-decoration: underline; }
+.hidden { display: none !important; }
+
+/* --- ПРИЛОЖЕНИЕ --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(10, 10, 30, 0.95);
+    border-bottom: 1px solid var(--primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.header h1 { font-size: 1.5rem; margin: 0; text-shadow: none; }
+
+.header-right { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+.logout-btn { padding: 5px 15px; font-size: 12px; width: auto; margin: 0; background: transparent; border: 1px solid var(--primary); }
+
+.post-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--bg-card);
+    border-radius: 15px;
+    text-align: center;
+    width: 95%;
+}
+
+/* --- ПОСТЫ --- */
+.post {
+    max-width: 600px;
+    margin: 25px auto;
+    background: var(--bg-card);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    width: 95%;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 12px;
+}
+
+.post-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+}
+
+.post-image {
+    width: 100%;
+    display: block;
+    max-height: 600px;
+    object-fit: cover;
+}
+
+/* Кнопки действий */
+.actions {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 24px;
+}
+
+.actions i {
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.actions i:hover { transform: scale(1.2); }
+.actions .fa-heart.liked { color: #ff0055; animation: pulse 0.4s ease-in-out; text-shadow: 0 0 15px #ff0055; }
+
+/* Комментарии */
+.comments { padding: 0 15px 15px; font-size: 14px; }
+.comment-row { margin-bottom: 6px; }
+.comment-author { color: var(--accent); font-weight: bold; margin-right: 5px; }
+
+.comment-form { display: flex; gap: 10px; margin-top: 15px; }
+.comment-form input { padding: 10px; margin: 0; flex: 1; }
+.comment-form button { width: auto; margin: 0; padding: 0 20px; }
+
+/* Адаптив для мобилок */
+@media (max-width: 600px) {
+    h1 { font-size: 2.5rem; }
+    .header { padding: 10px 15px; }
+    .auth-card { padding: 25px; margin: 0 15px; }
+    .post, .post-form { width: 100%; border-radius: 0; margin: 10px 0; border-left: none; border-right: none; }
+}
+
+/* Добавьте эти стили в конец файла */
+
+/* Анимация для лайка */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Стили для комментариев */
+.comment-form {
+    display: flex;
+    gap: 10px;
+    padding: 10px 15px;
+    border-top: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.comment-form input {
+    flex: 1;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+}
+
+.comment-form button {
+    width: auto;
+    padding: 8px 20px;
+    margin: 0;
+    background: var(--primary);
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.comment-form button:hover {
+    background: var(--accent);
+    color: var(--bg-dark);
+}
+
+/* Стиль для пустой ленты */
+.empty-feed {
+    text-align: center;
+    padding: 50px 20px;
+    color: #888;
+    font-size: 16px;
+}
+
+/* Загрузка */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Улучшаем адаптивность */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .comment-form {
+        flex-direction: column;
+    }
+    
+    .comment-form button {
+        width: 100%;
+    }
+}
